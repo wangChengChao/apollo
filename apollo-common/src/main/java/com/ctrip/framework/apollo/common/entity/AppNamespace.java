@@ -15,8 +15,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "AppNamespace")
-@SQLDelete(sql = "Update AppNamespace set isDeleted = 1 where id = ?")
-@Where(clause = "isDeleted = 0")
+@SQLDelete(sql = "Update \"AppNamespace\" set \"IsDeleted\" = 1 where \"Id\" = ?")
+@Where(clause = "\"IsDeleted\" = 0")
 public class AppNamespace extends BaseEntity {
 
   @NotBlank(message = "App Name cannot be blank")

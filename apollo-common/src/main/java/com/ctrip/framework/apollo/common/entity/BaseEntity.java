@@ -2,9 +2,7 @@ package com.ctrip.framework.apollo.common.entity;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.MoreObjects.ToStringHelper;
-
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,13 +13,15 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class BaseEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence")
+  @SequenceGenerator(name = "sequence", sequenceName = "ID_SEQ", allocationSize = 1)
   @Column(name = "Id")
   private long id;
 
@@ -105,14 +105,16 @@ public abstract class BaseEntity {
   }
 
   protected ToStringHelper toStringHelper() {
-    return MoreObjects.toStringHelper(this).omitNullValues().add("id", id)
+    return MoreObjects.toStringHelper(this)
+        .omitNullValues()
+        .add("id", id)
         .add("dataChangeCreatedBy", dataChangeCreatedBy)
         .add("dataChangeCreatedTime", dataChangeCreatedTime)
         .add("dataChangeLastModifiedBy", dataChangeLastModifiedBy)
         .add("dataChangeLastModifiedTime", dataChangeLastModifiedTime);
   }
 
-  public String toString(){
+  public String toString() {
     return toStringHelper().toString();
   }
 }

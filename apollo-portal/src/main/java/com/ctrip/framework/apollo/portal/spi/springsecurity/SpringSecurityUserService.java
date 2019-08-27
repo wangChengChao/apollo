@@ -46,7 +46,7 @@ public class SpringSecurityUserService implements UserService {
 
   @Transactional
   public void createOrUpdate(UserPO user) {
-    String username = user.getUsername();
+      String username = user.getUsername();
 
     User userDetails = new User(username, encoder.encode(user.getPassword()), authorities);
 
