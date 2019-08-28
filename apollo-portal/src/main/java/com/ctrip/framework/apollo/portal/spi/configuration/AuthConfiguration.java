@@ -237,17 +237,17 @@ public class AuthConfiguration {
       jdbcUserDetailsManager.setUserExistsSql(
           "select \"Username\" from \"Users\" where \"Username\" = ?");
       jdbcUserDetailsManager.setCreateUserSql(
-          "insert into \"Users\" (\"Username\", \"Password\",\"Email\", \"Enabled\") values (?,?,?,?)");
+          " insert into \"Users\" (\"Id\",\"Username\", \"Password\", \"Enabled\") values (ID_SEQ.nextval,?,?,?)");
       jdbcUserDetailsManager.setUpdateUserSql(
-          "update \"Users\" set \"Password\" = ?, \"Enabled\" = ? where \"Id\" = (select u.Id from (select \"Id\" as Id from \"Users\" where \"Username\" = ?) as u)");
+          "update \"Users\" set \"Password\" = ?, \"Enabled\" = ? where \"Id\" = (select \"Id\" from \"Users\" where \"Username\"=?)");
       jdbcUserDetailsManager.setDeleteUserSql(
-          "delete from \"Users\" where \"Id\" = (select u.Id from (select \"Id\" as Id from \"Users\" where \"Username\" = ?) as u)");
+          "delete from \"Users\" where \"Id\" = (select \"Id\" from \"Users\" where \"Username\"=?)");
       jdbcUserDetailsManager.setCreateAuthoritySql(
-          "insert into \"Authorities\" (\"Username\", \"Authority\") values (?,?)");
+          "insert into \"Authorities\" (\"Id\",\"Username\", \"Authority\") values (ID_SEQ.nextval,?,?)");
       jdbcUserDetailsManager.setDeleteUserAuthoritiesSql(
-          "delete from \"Authorities\" where \"Id\" = (select u.Id from (select \"Id\" as Id from \"Users\" where \"Username\" = ?) as u)");
+          "delete from \"Authorities\" where \"Username\" = ?");
       jdbcUserDetailsManager.setChangePasswordSql(
-          "update \"Users\" set \"Password\" = ? where \"Id\" = (select u.Id  from (select \"Id\" as Id from \"Users\" where \"Username\" = ?) as u)");
+          "update \"Users\" set \"Password\" = ? where \"Id\" = (select \"Id\" from \"Users\" where \"Username\"=?)");
 
       return jdbcUserDetailsManager;
     }

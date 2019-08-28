@@ -22,7 +22,9 @@ public interface ItemRepository extends PagingAndSortingRepository<Item, Long> {
   Item findFirst1ByNamespaceIdOrderByLineNumDesc(Long namespaceId);
 
   @Modifying
-  @Query("update Item set isdeleted=1,DataChange_LastModifiedBy = ?2 where namespaceId = ?1")
+  @Query(
+      nativeQuery = true,
+      value =
+          "update \"Item\" set \"IsDeleted\"=1,\"DataChange_LastModifiedBy\" = ?2 where \"NamespaceId\" = ?1")
   int deleteByNamespaceId(long namespaceId, String operator);
-
 }

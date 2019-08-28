@@ -11,7 +11,8 @@ import java.util.List;
 
 public interface FavoriteRepository extends PagingAndSortingRepository<Favorite, Long> {
 
-  List<Favorite> findByUserIdOrderByPositionAscDataChangeCreatedTimeAsc(String userId, Pageable page);
+  List<Favorite> findByUserIdOrderByPositionAscDataChangeCreatedTimeAsc(
+      String userId, Pageable page);
 
   List<Favorite> findByAppIdOrderByPositionAscDataChangeCreatedTimeAsc(String appId, Pageable page);
 
@@ -20,6 +21,9 @@ public interface FavoriteRepository extends PagingAndSortingRepository<Favorite,
   Favorite findByUserIdAndAppId(String userId, String appId);
 
   @Modifying
-  @Query("UPDATE Favorite SET IsDeleted=1,DataChange_LastModifiedBy = ?2 WHERE AppId=?1")
+  @Query(
+      nativeQuery = true,
+      value =
+          "UPDATE \"Favorite\" SET \"IsDeleted\"=1,\"DataChange_LastModifiedBy\" = ?2 WHERE \"AppId\"=?1")
   int batchDeleteByAppId(String appId, String operator);
 }

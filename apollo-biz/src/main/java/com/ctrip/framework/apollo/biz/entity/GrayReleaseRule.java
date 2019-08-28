@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Where(clause = "\"IsDeleted\" = 0")
 public class GrayReleaseRule extends BaseEntity{
 
-  @Column(name = "appId", nullable = false)
+  @Column(name = "AppId", nullable = false)
   private String appId;
 
   @Column(name = "ClusterName", nullable = false)
@@ -30,7 +30,7 @@ public class GrayReleaseRule extends BaseEntity{
   @Column(name = "Rules")
   private String rules;
 
-  @Column(name = "releaseId", nullable = false)
+  @Column(name = "ReleaseId", nullable = false)
   private Long releaseId;
 
   @Column(name = "BranchStatus", nullable = false)

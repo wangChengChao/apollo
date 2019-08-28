@@ -8,9 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-/**
- * @author Jason Song(song_s@ctrip.com)
- */
+/** @author Jason Song(song_s@ctrip.com) */
 public interface ConsumerRoleRepository extends PagingAndSortingRepository<ConsumerRole, Long> {
   /**
    * find consumer roles by userId
@@ -19,14 +17,15 @@ public interface ConsumerRoleRepository extends PagingAndSortingRepository<Consu
    */
   List<ConsumerRole> findByConsumerId(long consumerId);
 
-  /**
-   * find consumer roles by roleId
-   */
+  /** find consumer roles by roleId */
   List<ConsumerRole> findByRoleId(long roleId);
 
   ConsumerRole findByConsumerIdAndRoleId(long consumerId, long roleId);
 
   @Modifying
-  @Query("UPDATE ConsumerRole SET IsDeleted=1, DataChange_LastModifiedBy = ?2 WHERE RoleId in ?1")
+  @Query(
+      nativeQuery = true,
+      value =
+          "UPDATE \"ConsumerRole\" SET \"IsDeleted\"=1, \"DataChange_LastModifiedBy\" = ?2 WHERE \"RoleId\" in ?1")
   Integer batchDeleteByRoleIds(List<Long> roleIds, String operator);
 }
