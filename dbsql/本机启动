@@ -1,0 +1,22 @@
+启动ConfigService&AdminService
+Main Class:com.apollo-assembly#ctrip.framework.apollo.assembly.ApolloApplication
+VM参数:
+-Dapollo_profile=github
+-Ddev_meta=http://localhost:8080/
+-Dspring.datasource.url=jdbc:oracle:thin:@localhost:1521:orcl
+-Dspring.datasource.username=ApolloConfig
+-Dspring.datasource.password=ApolloConfig
+-Deureka.instance.prefer-ip-address=true
+Program参数:
+--configservice --adminservice
+启动PortalService:
+Main Class:apollo-portal#com.ctrip.framework.apollo.portal.PortalApplication
+VM 参数:
+-Dapollo_profile=github,auth
+-Ddev_meta=http://localhost:8080/
+-Dserver.port=8070
+-Dspring.datasource.url=jdbc:oracle:thin:@localhost:1521:orcl
+-Dspring.datasource.username=ApolloPortal
+-Dspring.datasource.password=ApolloPortal
+
+
