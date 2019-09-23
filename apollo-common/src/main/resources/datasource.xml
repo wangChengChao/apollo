@@ -35,5 +35,5 @@
      logabandoned="false"
      minevictableidletimemillis="30000"
      option="sendstringparametersasunicode=false"-->
-  />
+
 </Datasources>
